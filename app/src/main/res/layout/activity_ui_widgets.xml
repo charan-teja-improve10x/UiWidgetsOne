@@ -43,8 +43,25 @@
                 android:layout_weight="1"
                 android:text="Datepicker" />
 
+            <Button
+                android:id="@+id/timepicker_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:text="TimePicker" />
+
         </LinearLayout>
     </HorizontalScrollView>
+
+    <TimePicker
+        android:id="@+id/clock_tp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </TimePicker>
 
     <DatePicker
         android:id="@+id/calender_dp"
