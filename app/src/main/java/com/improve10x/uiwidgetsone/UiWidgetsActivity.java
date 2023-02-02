@@ -29,12 +29,22 @@ public class UiWidgetsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ui_widgets);
         handleInitin();
+        hideAllComponents();
         handleSubmitBtn();
         handleSeekBarBtn();
         handleRatingBarBtn();
         handleDatePickerBtn();
         handleTimePickerBtn();
 
+    }
+
+    private void hideAllComponents() {
+        clockTp.setVisibility(View.GONE);
+        calenderDp.setVisibility(View.GONE);
+        musicSb.setVisibility(View.GONE);
+        ratingBarRb.setVisibility(View.GONE);
+        submitBtn.setVisibility(View.GONE);
+        progressTxt.setVisibility(View.GONE);
     }
 
     private void handleInitin() {
@@ -53,6 +63,9 @@ public class UiWidgetsActivity extends AppCompatActivity {
     public void handleSeekBarBtn() {
         seekBarBtn.setOnClickListener(view -> {
             musicSb.setVisibility(View.VISIBLE);
+            submitBtn.setVisibility(View.VISIBLE);
+            progressTxt.setText("");
+            progressTxt.setVisibility(View.VISIBLE);
             ratingBarRb.setVisibility(View.GONE);
             calenderDp.setVisibility(View.GONE);
             clockTp.setVisibility(View.GONE);
@@ -62,6 +75,9 @@ public class UiWidgetsActivity extends AppCompatActivity {
     public void handleRatingBarBtn() {
         ratingBarBtn.setOnClickListener(v -> {
             ratingBarRb.setVisibility(View.VISIBLE);
+            submitBtn.setVisibility(View.VISIBLE);
+            progressTxt.setText("");
+            progressTxt.setVisibility(View.VISIBLE);
             musicSb.setVisibility(View.GONE);
             calenderDp.setVisibility(View.GONE);
             clockTp.setVisibility(View.GONE);
@@ -71,6 +87,9 @@ public class UiWidgetsActivity extends AppCompatActivity {
     public void handleDatePickerBtn() {
         datePickerBtn.setOnClickListener(v -> {
             calenderDp.setVisibility(View.VISIBLE);
+            submitBtn.setVisibility(View.VISIBLE);
+            progressTxt.setText("");
+            progressTxt.setVisibility(View.VISIBLE);
             ratingBarRb.setVisibility(View.GONE);
             musicSb.setVisibility(View.GONE);
             clockTp.setVisibility(View.GONE);
@@ -81,6 +100,9 @@ public class UiWidgetsActivity extends AppCompatActivity {
         timePickerBtn.setOnClickListener(v -> {
             clockTp.setIs24HourView(true);
             clockTp.setVisibility(View.VISIBLE);
+            submitBtn.setVisibility(View.VISIBLE);
+            progressTxt.setText("");
+            progressTxt.setVisibility(View.VISIBLE);
             calenderDp.setVisibility(View.GONE);
             ratingBarRb.setVisibility(View.GONE);
             musicSb.setVisibility(View.GONE);
