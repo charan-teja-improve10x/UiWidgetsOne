@@ -89,19 +89,26 @@ public class UiWidgetsActivity extends AppCompatActivity {
 
     private void handleSubmitBtn() {
         submitBtn.setOnClickListener(view -> {
-            int progress = musicSb.getProgress();
-            progressTxt.setText(progress + " ");
-            String rating = String.valueOf(ratingBarRb.getRating());
-            progressTxt.setText(rating);
-            String year = String.valueOf(calenderDp.getYear());
-            String month = String.valueOf(calenderDp.getMonth());
-            String date = String.valueOf(calenderDp.getDayOfMonth());
-            progressTxt.setText(date + " / " + month + " / " + year);
-            clockTp.setIs24HourView(true);
-            String hour = String.valueOf(clockTp.getCurrentHour());
-            String minute = String.valueOf(clockTp.getCurrentMinute());
-            progressTxt.setText(hour + " : " + minute);
-
+            if (musicSb.getVisibility() == View.VISIBLE){
+                int progress = musicSb.getProgress();
+                progressTxt.setText(progress + "");
+            }
+            if (ratingBarRb.getVisibility() == View.VISIBLE){
+                String rating = String.valueOf(ratingBarRb.getRating());
+                progressTxt.setText(rating);
+            }
+            if (calenderDp.isShown() == true){
+                String date = String.valueOf(calenderDp.getDayOfMonth());
+                String month = String.valueOf(calenderDp.getMonth()+1);
+                String year = String.valueOf(calenderDp.getYear());
+                progressTxt.setText(date + " / " + month + " / " + year);
+            }
+            if (clockTp.isShown() == true){
+                clockTp.setIs24HourView(true);
+                String hours = String.valueOf(clockTp.getCurrentHour());
+                String minutes = String.valueOf(clockTp.getCurrentMinute());
+                progressTxt.setText(hours + " : " + minutes);
+            }
         });
     }
 }
