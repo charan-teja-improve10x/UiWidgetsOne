@@ -12,71 +12,70 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class UiWidgetsActivity extends AppCompatActivity {
-    Button submitBtn;
-    Button ratingBarBtn;
-    Button seekBarBtn;
-    Button datePickerBtn;
-    Button timePickerBtn;
-    TextView progressTxt;
-    SeekBar musicSb;
-    RatingBar ratingBarRb;
-    DatePicker calenderDp;
-    TimePicker clockTp;
+  Button submitBtn;
+  Button seekBarBtn;
+  Button ratingBarBtn;
+  Button datePickerBtn;
+  Button timePickerBtn;
+  SeekBar musicSb;
+  RatingBar ratingBarRb;
+  DatePicker calenderDp;
+  TimePicker clockTp;
+  TextView progressTxt;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ui_widgets);
-        handleInitin();
-        hideAllComponents();
-        handleSubmitBtn();
+        intiateAllComponents();
+        hideUiComponents();
         handleSeekBarBtn();
         handleRatingBarBtn();
         handleDatePickerBtn();
         handleTimePickerBtn();
-
+        handleSubmitBtn();
     }
 
-    private void hideAllComponents() {
-        clockTp.setVisibility(View.GONE);
-        calenderDp.setVisibility(View.GONE);
+    private void intiateAllComponents() {
+        submitBtn = findViewById(R.id.submit_btn);
+        seekBarBtn = findViewById(R.id.seek_bar_btn);
+        ratingBarBtn = findViewById(R.id.ratingbar_btn);
+        datePickerBtn = findViewById(R.id.datepicker_btn);
+        timePickerBtn = findViewById(R.id.timepicker_btn);
+        musicSb = findViewById(R.id.music_sb);
+        ratingBarRb = findViewById(R.id.ratingbar_rb);
+        calenderDp = findViewById(R.id.calender_dp);
+        clockTp = findViewById(R.id.clock_tp);
+        progressTxt = findViewById(R.id.progress_txt);
+    }
+
+    private void hideUiComponents() {
         musicSb.setVisibility(View.GONE);
         ratingBarRb.setVisibility(View.GONE);
+        calenderDp.setVisibility(View.GONE);
+        clockTp.setVisibility(View.GONE);
         submitBtn.setVisibility(View.GONE);
         progressTxt.setVisibility(View.GONE);
     }
 
-    private void handleInitin() {
-        seekBarBtn = findViewById(R.id.seek_bar_btn);
-        progressTxt = findViewById(R.id.progress_txt);
-        submitBtn = findViewById(R.id.submit_btn);
-        musicSb = findViewById(R.id.music_sb);
-        ratingBarBtn = findViewById(R.id.ratingbar_btn);
-        ratingBarRb = findViewById(R.id.ratingbar_rb);
-        datePickerBtn = findViewById(R.id.datepicker_btn);
-        calenderDp = findViewById(R.id.calender_dp);
-        timePickerBtn = findViewById(R.id.timepicker_btn);
-        clockTp = findViewById(R.id.clock_tp);
+    private void handleSeekBarBtn() {
+       seekBarBtn.setOnClickListener(v -> {
+           musicSb.setVisibility(View.VISIBLE);
+           submitBtn.setVisibility(View.VISIBLE);
+           progressTxt.setText(" ");
+           progressTxt.setVisibility(View.VISIBLE);
+           ratingBarRb.setVisibility(View.GONE);
+           calenderDp.setVisibility(View.GONE);
+           clockTp.setVisibility(View.GONE);
+       });
     }
 
-    public void handleSeekBarBtn() {
-        seekBarBtn.setOnClickListener(view -> {
-            musicSb.setVisibility(View.VISIBLE);
-            submitBtn.setVisibility(View.VISIBLE);
-            progressTxt.setText("");
-            progressTxt.setVisibility(View.VISIBLE);
-            ratingBarRb.setVisibility(View.GONE);
-            calenderDp.setVisibility(View.GONE);
-            clockTp.setVisibility(View.GONE);
-        });
-    }
-
-    public void handleRatingBarBtn() {
+    private void handleRatingBarBtn() {
         ratingBarBtn.setOnClickListener(v -> {
             ratingBarRb.setVisibility(View.VISIBLE);
             submitBtn.setVisibility(View.VISIBLE);
-            progressTxt.setText("");
+            progressTxt.setText(" ");
             progressTxt.setVisibility(View.VISIBLE);
             musicSb.setVisibility(View.GONE);
             calenderDp.setVisibility(View.GONE);
@@ -84,53 +83,51 @@ public class UiWidgetsActivity extends AppCompatActivity {
         });
     }
 
-    public void handleDatePickerBtn() {
+    private void handleDatePickerBtn() {
         datePickerBtn.setOnClickListener(v -> {
-            calenderDp.setVisibility(View.VISIBLE);
+           calenderDp.setVisibility(View.VISIBLE);
             submitBtn.setVisibility(View.VISIBLE);
-            progressTxt.setText("");
+            progressTxt.setText(" ");
             progressTxt.setVisibility(View.VISIBLE);
-            ratingBarRb.setVisibility(View.GONE);
             musicSb.setVisibility(View.GONE);
+            ratingBarRb.setVisibility(View.GONE);
             clockTp.setVisibility(View.GONE);
         });
     }
 
-    public void handleTimePickerBtn() {
+    private void handleTimePickerBtn() {
         timePickerBtn.setOnClickListener(v -> {
             clockTp.setIs24HourView(true);
             clockTp.setVisibility(View.VISIBLE);
             submitBtn.setVisibility(View.VISIBLE);
-            progressTxt.setText("");
+            progressTxt.setText(" ");
             progressTxt.setVisibility(View.VISIBLE);
-            calenderDp.setVisibility(View.GONE);
-            ratingBarRb.setVisibility(View.GONE);
             musicSb.setVisibility(View.GONE);
+            ratingBarRb.setVisibility(View.GONE);
+            calenderDp.setVisibility(View.GONE);
         });
     }
-
     private void handleSubmitBtn() {
-        submitBtn.setOnClickListener(view -> {
-            if (musicSb.getVisibility() == View.VISIBLE){
-                int progress = musicSb.getProgress();
-                progressTxt.setText(progress + "");
-            }
-            if (ratingBarRb.getVisibility() == View.VISIBLE){
-                String rating = String.valueOf(ratingBarRb.getRating());
-                progressTxt.setText(rating);
-            }
-            if (calenderDp.isShown() == true){
-                String date = String.valueOf(calenderDp.getDayOfMonth());
-                String month = String.valueOf(calenderDp.getMonth()+1);
-                String year = String.valueOf(calenderDp.getYear());
-                progressTxt.setText(date + " / " + month + " / " + year);
-            }
-            if (clockTp.isShown() == true){
-                clockTp.setIs24HourView(true);
-                String hours = String.valueOf(clockTp.getCurrentHour());
-                String minutes = String.valueOf(clockTp.getCurrentMinute());
-                progressTxt.setText(hours + " : " + minutes);
-            }
+        submitBtn.setOnClickListener(v -> {
+          if (musicSb.getVisibility() == View.VISIBLE){
+              int progress = musicSb.getProgress();
+              progressTxt.setText(progress + " ");
+          }
+          if (ratingBarRb.getVisibility() == View.VISIBLE){
+              String rating = String.valueOf(ratingBarRb.getRating());
+              progressTxt.setText(rating);
+          }
+          if (calenderDp.isShown() == true){
+              String date = String.valueOf(calenderDp.getDayOfMonth());
+              String month = String.valueOf(calenderDp.getMonth()+1);
+              String year = String.valueOf(calenderDp.getYear());
+              progressTxt.setText(date + " / " + month + " /" + year);
+          }
+          if (clockTp.isShown() == true){
+              String hours = String.valueOf(clockTp.getCurrentHour());
+              String minutes = String.valueOf(clockTp.getCurrentMinute());
+              progressTxt.setText(hours + " : " + minutes);
+          }
         });
     }
 }
